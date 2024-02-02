@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quiz App</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .options-container {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Fuego's Quiz App</h1>
+    <div class="js-quiz-container"></div>
+   
+    <script>
+      let myArr = [
+      {
+        question: 'Science: What is the chemical symbol for the element oxygen?',
+        options: ['O', 'Ox', 'Og', 'On'],
+        correctAnswer: 'O'
+      },
+      {
+        question: 'Geography: Which is the largest ocean on Earth?',
+        options: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
+        correctAnswer: 'Pacific Ocean'
+      },
+      {
+        question: 'Art: Who painted the Mona Lisa?',
+        options: ['Vincent Van Gogh', 'Pablo Picasso', 'Leonardo da Vinci', 'Claude Monet'],
+        correctAnswer: 'Leonardo da Vinci'
+      },
+      {
+        question: 'History: Who was the first president of the United States?',
+        options: ['George Washington', 'Thomas Jefferson', 'Abraham Lincoln', 'John Adams'],
+        correctAnswer: 'George Washington'
+      },
+      {
+        question: 'Mathematics: What is the square root of 144?',
+        options: ['10', '12', '14', '16'],
+        correctAnswer: '12'
+      },
+      {
+        question: 'Literature: Who wrote "To Kill a Mockingbird',
+        options: ['Harper Lee', 'Mark Twain', 'Ernest Hemingway', 'F. Scott Fitzgerald'],
+        correctAnswer: 'Harper Lee'
+      },
+      {
+        question: 'Science: What is the atomic number of hydrogen?',
+        options: ['1', '2', '3', '4'],
+        correctAnswer: '1'
+      },
+      {
+        question: 'Geography: What is the capital of Australia?',
+        options: ['Sydney', 'Melbourne', 'Perth', 'Canberra'],
+        correctAnswer: 'Canberra'
+      },
+      {
+        question: 'Sports: In which sport would you perform a slam dunk?',
+        options: ['Baseball', 'Basketball', 'Volleyball', 'Tennis' ],
+        correctAnswer: 'Basketball'
+      },
+      {
+        question: 'Astronomy: Which planet is known as the Red Planet?',
+        options: ['Venus', 'Mars', 'Jupiter', 'Saturn']
+      },
+      {
+        question: 'Technology: Who are the founders of Google?',
+        options: ['Steve Jobs and Steve Wozniak', 'Bill Gates and Paul Allen', 'Larry Page and Sergey Brin', 'Mark Zuckerberg and Eduardo Saverin' ],
+        correctAnswer: 'Larry Page and Sergey Brin'
+      },
+      {
+        question: 'History: Who discovered America?',
+        options: ['Christopher Columbus', 'Leif Erikson', 'Ferdinand Magellan', 'Marco Polo'],
+        correctAnswer: 'Christopher Columbus'
+      },
+      {
+        question: 'Biology: What is the powerhouse of the cell?',
+        options: ['Nucleus', 'Endoplasmic Reticculum', 'Mitochondria', 'Heart'],
+        correctAnswer: 'Mitochondria'
+      }
+      ];
+
+      function getRandomQuestions(myArr) {
+        let selectedQuestions = [];
+
+        for (let i = 0; i < 10; i++) {
+          let randomIndex = Math.floor(Math.random() * myArr.length);
+          selectedQuestions.push(myArr[randomIndex]);
+          myArr.splice(randomIndex, 1);
+        }
+        return selectedQuestions;
+      };
+
+      function createQuizContent(questions) {
+        let html = '';
+        
+        for (let i = 0; i < questions.length; i++) {
+          html += `
+          <div class="question js-question">${questions[i].question}</div>
+          <div class="options-container">
+          `;
+          for (let j = 0; j < questions[i].options.length; j++) {
+            html+= `
+            <label class="option js-option">
+            <input type="radio" name="choice-${i}" value="${questions[i].options[j]}">${questions[i].options[j]}
+            </label>
+            `;
+          }
+          html += `</div>`;
+        }
+        return html;
+      };
+
+      let selectedQuestions = getRandomQuestions(myArr);
+      let quizContent = createQuizContent(selectedQuestions);
+
+      document.querySelector('.js-quiz-container').innerHTML = quizContent;
+    </script>
+  </body>
+</html>
