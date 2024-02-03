@@ -120,6 +120,18 @@
       let quizContent = createQuizContent(selectedQuestions);
 
       document.querySelector('.js-quiz-container').innerHTML = quizContent;
+
+      function getSelectedAnswer () {
+        let quizContainer = document.querySelector('.js-quiz-container');
+        quizContainer.addEventListener('change', (event) => {
+        if (event.target.type === 'radio') {
+          const selectedOption = event.target.value;
+          console.log(`Selected value:`, selectedOption)
+        }
+        })
+      };
+      getSelectedAnswer();
+
     </script>
   </body>
 </html>
